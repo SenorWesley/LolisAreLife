@@ -1,0 +1,7 @@
+{
+  "name": "Lolicon2017/LolisAreLife",
+  "description": "An easy to use, basic, MVC Framework (???). Onii-chan (programmed in MS DOS, ported to php)",
+  "require": {
+    "php": "^5.6.3 || ^7.0"
+  }
+}
