@@ -1,18 +1,30 @@
 <?php
 /**
- * Created by PhpStorm.
- * User: Wesley Peeters
- * Date: 24-1-2017
- * Time: 13:36
+ *      _        _ _      _           _    _  __
+ *     | |   ___| (_)___ /_\  _ _ ___| |  (_)/ _|___
+ *     | |__/ _ \ | (_-</ _ \| '_/ -_) |__| |  _/ -_)
+ *     |____\___/_|_/__/_/ \_\_| \___|____|_|_| \___|
+ *
  */
 
 namespace LolisAreLife\Core;
 
+/**
+ * All the routing of the website goes through this file
+ *
+ * Class Router
+ * @package LolisAreLife\Core
+ * @author Wesley Peeters [@link me@wesleypeeters.com]
+ * @auhor Jason Tavernier [@link Jason@tavernier.nl]
+ * @version V0.1
+ * @since V0.1
+ */
 
 class Router {
     /**
      * Array of all registered routes.
      *
+     * @access protected
      * @var array $allRoutes
      */
     protected $allRoutes = [];
@@ -20,6 +32,7 @@ class Router {
     /**
      * Array of possible routing methods.
      *
+     * @access protected
      * @var array $methods.
      */
     protected $methods = ["GET", "POST", "PUT", "DELETE"];
@@ -27,6 +40,7 @@ class Router {
     /**
      * All types of end routes.
      *
+     * @access protected
      * @var array $types
      */
     protected $types = [
@@ -40,6 +54,7 @@ class Router {
     /**
      * Return all registered routes.
      *
+     * @access public
      * @return mixed
      */
     public function getRoutes() {
@@ -49,6 +64,7 @@ class Router {
     /**
      * Register a route into the `$allRoutes` array.
      *
+     * @access public
      * @param string $method
      * @param string $route
      * @param string $action
@@ -63,6 +79,8 @@ class Router {
 
     /**
      * Match a given routing request against routes.
+     *
+     * @access public
      */
     public function dispatch() {
         $uri = parse_url($_SERVER["REQUEST_URI"], PHP_URL_PATH);
@@ -73,6 +91,7 @@ class Router {
                 if (substr($route, 0, 1) !== "/")
                     $route = "/" . $route;
 
+                    Request::getVariables();
                 if (preg_match("@^" . $route . "$@", $uri, $arguments)) {
                     array_shift($arguments);
                     $action = explode("@", $action);
